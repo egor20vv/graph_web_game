@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Programmer live</title>
+</head>
+<body>
+
+<h2> {{ header }} </h2>
+<p> <i> {{ content }} </i> </p>
+
+<br>
+
+<p>
+    {% for choice in choices %}
+        <form action="/response" method="post">
+            <button type="submit" name="ch" value="{{ choice.to_dialog_id }}">
+                {{ choice.header }}
+            </button>
+        </form>
+    {% endfor %}
+</p>
+<p>
+     <form action="/" method="get">
+        <button type="submit">
+            Я наигрался
+        </button>
+    </form>
+</p>
+
+</body>
+</html>
