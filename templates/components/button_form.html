@@ -1,0 +1,11 @@
+
+{% macro create_response_button(action='', name='', value='', method='post') %}
+    <form {% if action != "" %} action="{{ action }}" {% endif %}
+          {% if method != "" %} method="{{ method  }}" {% endif %}>
+        <button type="submit"
+                {% if name != "" %} name="{{ name }}" {% endif %}
+                value="{{ value }}">
+            {{ caller() }}
+        </button>
+    </form>
+{% endmacro %}

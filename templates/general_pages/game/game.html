@@ -1,0 +1,39 @@
+{% extends "general_pages/base.html" %}
+{% import "components/button_form.html" as button_form %}
+
+{% block title %} {{ super() }} - In Game {% endblock %}
+
+{% block body %}
+
+<h2> {{ header }} </h2>
+<p> <i> {{ content }} </i> </p>
+
+
+
+<p>
+    {% if back_dialog %}
+        {% call button_form.create_response_button(action='/back',
+                                                   method='post',
+                                                   name="ch",
+                                                   value=back_dialog) %}
+            Назад
+        {% endcall %}
+    {% else %}
+        <br>
+    {% endif %}
+</p>
+
+<br>
+
+<p>
+    {% for choice in  choices %}
+        {% call button_form.create_response_button(action="/response",
+                                                   name="ch",
+                                                   value=choice.to_dialog_id) %}
+            {{choice.header}}
+        {% endcall %}
+    {% endfor %}
+</p>
+
+
+{% endblock %}

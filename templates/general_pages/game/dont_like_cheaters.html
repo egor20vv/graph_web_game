@@ -1,0 +1,15 @@
+{% extends "general_pages/base.html" %}
+{% import "components/button_form.html" as button_form %}
+
+{% block title %} We're don't like cheaters {% endblock %}
+
+{% block page_title %} МЫ НЕ ОСОБО ЖАЛУЕМ ЧИТЕРОВ {% endblock %}
+
+{% block body %}
+
+    <p>Вернись и подумай над своим поведением<p>
+    {% call button_form.create_response_button(action="/continue") %}
+        Вернуться
+    {% endcall %}
+
+{% endblock %}

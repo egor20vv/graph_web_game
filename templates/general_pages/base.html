@@ -1,0 +1,42 @@
+{% import 'components/button_form.html' as button_form %}
+
+<!DOCTYPE html>
+<html lang="en-ru">
+<head>
+    {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>{% block title %} Programmer live {% endblock %}</title>
+
+    {% endblock %}
+</head>
+<body>
+
+    {% if back_url and back_url['url'] %}
+        {% call button_form.create_response_button(action=back_url['url'], method='get') %}
+            {% if back_url['button_content'] %}
+                {{ back_url['button_content'] }}
+            {% else %}
+                Вернуться
+            {% endif %}
+        {% endcall %}
+    {% elif back_url %}
+        {% call button_form.create_response_button(action=back_url, method='get') %}
+            Вернуться
+        {% endcall %}
+    {% endif %}
+
+    <h2> {% block page_title %} {% endblock %} </h2>
+
+    {% block body %}
+
+
+    {% endblock %}
+</body>
+<footer>
+    {% block footer %}
+    {% endblock %}
+</footer>
+
+</html>

@@ -1,0 +1,17 @@
+{% extends "general_pages/base.html" %}
+{% import "components/button_form.html" as button_form %}
+
+{% block title %} {{ super() }} - Main Menu {% endblock %}
+
+{% block page_title %} Меню {% endblock %}
+
+{% block body %}
+
+    {% set menu_items = [('/continue', 'Продолжить'), ('/new_game', 'Новая Игра'), ('/about', 'Об Игре')] %}
+    {% for menu_item in menu_items %}
+        {% call button_form.create_response_button(action=menu_item[0]) %}
+            {{ menu_item[1] }}
+        {% endcall %}
+    {% endfor %}
+
+{% endblock %}
