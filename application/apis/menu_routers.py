@@ -2,7 +2,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 from fastapi import APIRouter, Request
 
-from apis.game_logic.dialogs_builder import ENTRY_DIALOG_NAME
+from .game_logic.dialogs_builder import ENTRY_DIALOG_NAME
 
 
 templates = Jinja2Templates(directory='templates')

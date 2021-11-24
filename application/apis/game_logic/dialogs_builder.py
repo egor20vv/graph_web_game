@@ -1,7 +1,7 @@
 import json
 from json.encoder import JSONEncoder
 
-from apis.game_logic.dialogs import DialogsManager, View, Choice
+from .dialogs import DialogsManager, View, Choice
 
 
 ENTRY_DIALOG_NAME = 'entry'

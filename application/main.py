@@ -19,13 +19,14 @@ def set_app():
     return _app
 
 
-def start_uvicorn(file_name: str, app_name: str):
-    port = os.environ['PORT'] if 'PORT' in os.environ else 5000
-    uvicorn.run(f"{file_name}:{app_name}", port=port, reload=True, access_log=False)
+# def start_uvicorn(file_name: str, app_name: str):
+#     port = os.environ['PORT'] if 'PORT' in os.environ else 5000
+#     uvicorn.run(f"{file_name}:{app_name}", port=port, reload=True, access_log=False)
 
 
 app = set_app()
 
 
 if __name__ == '__main__':
-    start_uvicorn('main', 'app')
+    pass
+    #start_uvicorn('main', 'app')
