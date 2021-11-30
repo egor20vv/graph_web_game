@@ -1,0 +1,66 @@
+{
+  "coding_time": {
+    "id": "coding_time",
+    "header": "Кодинг",
+    "content": "Ну вот ты и покодил",
+    "choices": [
+      {
+        "header": "Покодить еще",
+        "to_dialog_id": "coding_time"
+      },
+      {
+        "header": "Поспать",
+        "to_dialog_id": "entry"
+      }
+    ]
+  },
+  "entry": {
+    "choices": [
+      {
+        "header": "Пойти прямо",
+        "to_dialog_id": "still_sleep"
+      },
+      {
+        "header": "Пойти обратно",
+        "to_dialog_id": "still_sleep"
+      },
+      {
+        "header": "Проснуться",
+        "to_dialog_id": "woke_up"
+      }
+    ],
+    "content": "Ты во сне, что будешь делать?",
+    "header": "Сон",
+    "id": "entry"
+  },
+  "still_sleep": {
+    "id": "still_sleep",
+    "header": "Все еще сон",
+    "content": "Ты все еще во сне, что будешь делать?",
+    "choices": [
+      {
+        "header": "Пойти прямо",
+        "to_dialog_id": "still_sleep"
+      },
+      {
+        "header": "Пойти обратно",
+        "to_dialog_id": "still_sleep"
+      },
+      {
+        "header": "Проснуться",
+        "to_dialog_id": "woke_up"
+      }
+    ]
+  },
+  "woke_up": {
+    "id": "woke_up",
+    "header": "Пробуждение",
+    "content": "Ну вот ты и проснулся",
+    "choices": [
+      {
+        "header": "Начать кодить",
+        "to_dialog_id": "coding_time"
+      },
+      {
+        "header": "Поспать", "to_dialog_id": "entry"}]}
+}

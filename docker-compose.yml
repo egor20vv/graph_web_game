@@ -1,8 +1,8 @@
-version: "2"
-
 services:
   website:
     build: .
+    env_file:
+      - .env
     command: >
       uvicorn
       --host 0.0.0.0
@@ -11,3 +11,8 @@ services:
       "main:app"
     ports:
       - "5000:8000"
+    volumes:
+      - web_game_data:${DATA_VOLUME_PATH}
+volumes:
+  web_game_data:
+    external: true

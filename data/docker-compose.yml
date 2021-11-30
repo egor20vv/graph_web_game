@@ -1,0 +1,9 @@
+services:
+  game_data_binder:
+    build: .
+    volumes:
+      - web_game_data:/data
+
+volumes:
+  web_game_data:
+    external: true

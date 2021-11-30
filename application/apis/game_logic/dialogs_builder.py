@@ -1,14 +1,36 @@
 import json
+import os
 from json.encoder import JSONEncoder
 
 from .dialogs import DialogsManager, View, Choice
-
+from .data_reader import get_raw_game_data
 
 ENTRY_DIALOG_NAME = 'entry'
 
 
 def get_built_dialogs() -> DialogsManager:
+    try:
+        raw_data = get_raw_game_data()
+        if raw_data is None:
+            raise Exception
+    except Exception:
+        return get_default_dialogs()
+    else:
+        data = {}
+        for key, val in raw_data.items():
+            data[key] = View(
+                id_=key,
+                header=val['header'],
+                content=val['content'],
+                choices=[Choice(
+                    header=ch['header'],
+                    to_dialog_id=ch['to_dialog_id']
+                ) for ch in val['choices']]
+            )
+        return DialogsManager(data)
 
+
+def get_default_dialogs() -> DialogsManager:
     dialogs = DialogsManager() \
         .add('entry', View(
             id_='entry',
@@ -16,8 +38,7 @@ def get_built_dialogs() -> DialogsManager:
             content='Ты во сне, что будешь делать?',
             choices=[
                 Choice(header='Пойти прямо', to_dialog_id='still_sleep'),
-                Choice(header='Пойти обратно', to_dialog_id='still_sleep'),
-                Choice(header='Проснуться', to_dialog_id='woke_up')
+                Choice(header='Пойти обратно', to_dialog_id='still_sleep')
             ]
         )
     ) \
@@ -27,28 +48,7 @@ def get_built_dialogs() -> DialogsManager:
             content='Ты все еще во сне, что будешь делать?',
             choices=[
                 Choice(header='Пойти прямо', to_dialog_id='still_sleep'),
-                Choice(header='Пойти обратно', to_dialog_id='still_sleep'),
-                Choice(header='Проснуться', to_dialog_id='woke_up')
-            ]
-        )
-    ) \
-        .add('woke_up', View(
-            id_='woke_up',
-            header='Пробуждение',
-            content='Ну вот ты и проснулся',
-            choices=[
-                Choice(header='Начать кодить', to_dialog_id='coding_time'),
-                Choice(header='Поспать', to_dialog_id='entry')
-            ]
-        )
-    ) \
-        .add('coding_time', View(
-            id_='coding_time',
-            header='Кодинг',
-            content='Ну вот ты и покодил',
-            choices=[
-                Choice(header='Покодить еще', to_dialog_id='coding_time'),
-                Choice(header='Поспать', to_dialog_id='entry')
+                Choice(header='Пойти обратно', to_dialog_id='still_sleep')
             ]
         )
     )
@@ -67,10 +67,12 @@ def main():
             else:
                 return o
 
-    dialogs = get_built_dialogs()
+    manager = get_built_dialogs()
 
-    json_dialog = json.loads(json.dumps(dialogs[ENTRY_DIALOG_NAME], cls=_MyEncoder))
-    print('entry:', json_dialog)
+    dialogs = manager.get_all_dialogs()
+
+    json_dialog = json.dumps(dialogs, cls=_MyEncoder, ensure_ascii=False)
+    print(json_dialog)
 
     # game = Game(dialogs, ENTRY_DIALOG_NAME)
 
